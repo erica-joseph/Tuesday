@@ -1,15 +1,16 @@
 package ucf.assignment;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControlTest {
-    private Model task;
-    private Model date;
-    public TableView<Model> tableview;
+
     @Test
     void initialize() {
     }
@@ -19,28 +20,34 @@ class ControlTest {
     }
 
     @Test
-   void addItems_when_asked_by_button() {
+    void addItems() {
+        ObservableList<Model> observableList = FXCollections.observableArrayList();
+        String inputTask = "get milk";
+        String date = "2021-12-10";
+        Model model = new Model(inputTask, date);
+        assert observableList.size()!=0;
 
-        Model model = new Model("Get milk", "2021-10-14");
-
-        }
-
-
+    }
 
     @Test
     void onEditChange() {
+        if(!model.equals(model.setTaskName(modelStringCellEditEvent.getNewValue()){
+            assertTrue(true);
+        }
     }
 
     @Test
     void clearList() {
-        Model beep = new Model("Get milk", "2021-12-10");
-
-        //boolean actual = beep.reader("src/main/java/org/example/assignment3/ex41/test41A.txt");
-        //boolean expected = true;
+        if(observableList.size() = 0){
+            assertTrue(true);
+        }
     }
+
+
 
     @Test
     void saveList() {
+
     }
 
     @Test
