@@ -1,12 +1,15 @@
 package ucf.assignment;
 
+import javafx.scene.control.TableView;
 import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControlTest {
-
+    private Model task;
+    private Model date;
+    public TableView<Model> tableview;
     @Test
     void initialize() {
     }
@@ -15,25 +18,14 @@ class ControlTest {
     void handleOpen() {
     }
 
-   // @Test
-//    void addItems() {
-//        @Test
-//        void when_button_is_clicked_text_changes(FxRobot robot) {
-//            // when:
-//            robot.clickOn(".button");
-//
-//            // then:
-//            FxAssert.verifyThat(button, LabeledMatchers.hasText("clicked!"));
-//            // or (lookup by css id):
-//            FxAssert.verifyThat("#myButton", LabeledMatchers.hasText("clicked!"));
-//            // or (lookup by css class):
-//            FxAssert.verifyThat(".button", LabeledMatchers.hasText("clicked!"));
-//        }
-//    }
-
     @Test
-    void completeTask() {
-    }
+   void addItems_when_asked_by_button() {
+
+        Model model = new Model("Get milk", "2021-10-14");
+
+        }
+
+
 
     @Test
     void onEditChange() {
@@ -41,6 +33,10 @@ class ControlTest {
 
     @Test
     void clearList() {
+        Model beep = new Model("Get milk", "2021-12-10");
+
+        //boolean actual = beep.reader("src/main/java/org/example/assignment3/ex41/test41A.txt");
+        //boolean expected = true;
     }
 
     @Test
