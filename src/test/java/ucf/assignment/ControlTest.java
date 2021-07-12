@@ -21,18 +21,18 @@ class ControlTest {
 
     @Test
     void addItems() {
-        ObservableList<Model> observableList = FXCollections.observableArrayList();
+       ObservableList<Model> observableList = FXCollections.observableArrayList();
         String inputTask = "get milk";
-        String date = "2021-12-10";
+      String date = "2021-12-10";
         Model model = new Model(inputTask, date);
-        assert observableList.size()!=0;
+       assert observableList.size()!=0;
 
     }
 
     @Test
     void onEditChange() {
         if(!model.equals(model.setTaskName(modelStringCellEditEvent.getNewValue()){
-            assertTrue(true);
+           assertTrue(true);
         }
     }
 
