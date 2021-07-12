@@ -1,5 +1,8 @@
 package ucf.assignment;
-
+/*
+ *  UCF COP3330 Summer 2021 Assignment 4 Solution
+ *  Copyright 2021 Erica Joseph
+ */
 import java.net.URL;
 
 import javafx.collections.ObservableList;
@@ -24,145 +27,101 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class Control implements Initializable{
-    public TableView<Model> tableview;
+    public TableView<Model> tableview; //table to display tasks
 
-    public TableColumn<Model,String> colTask;
-    public TableColumn<Model, String> dueDate;
-    public TableColumn status;
+    public TableColumn<Model,String> colTask; //column defining and holding tasks
+    public TableColumn<Model, String> dueDate; //column defining and holding the due date per task
+    public TableColumn status; //checkmark to note done tasks
 
-    public TextField inputTask;
-    public Button addItem;
-    public Button delete;
-    public DatePicker datePicker;
-    public Button ClearingList;
+    public TextField inputTask; //textfied input to store the item added to the to-do list
+    public Button addItem; //adding item to said list
+    public Button delete; //initiating the button to delete a selected item from the list
+    public DatePicker datePicker; //choosing date to submit to to-do list
+    public Button ClearingList; //button to execute the action of deleting all items from list
     public Button saving;
-    public MenuBar menuBarLoad;
-    public TextField nameFile;
+    public MenuBar menuBarLoad; //initiatin the menu
+    public TextField nameFile; //submitting title of text
+    public MenuItem saveList;
+    public MenuItem save; //act of saving and writing the tasks from the list
 
-    FileChooser fileChooser = new FileChooser();
+    FileChooser fileChooser = new FileChooser(); //instance of the file chooser
 
     @Override
-    public void initialize(URL location, ResourceBundle resources){
-        colTask.setCellValueFactory(new PropertyValueFactory<>("taskName"));
-        dueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
-        tableview.setItems(observableList);
-        tableview.setEditable(true);
-        colTask.setCellFactory(TextFieldTableCell.forTableColumn());
-        status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-
-        try {
-            catchFile();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void initialize(URL location, ResourceBundle resources){ //loading the initialized statements
+        colTask.setCellValueFactory(new PropertyValueFactory<>("taskName")); //initializing taksks
+        dueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate")); //initializing due dates
+        tableview.setItems(observableList); //printle items of the table
+        tableview.setEditable(true); //determining them editable
+        colTask.setCellFactory(TextFieldTableCell.forTableColumn()); //setting tasks to accept the text
+        status.setCellValueFactory(new PropertyValueFactory<>("status")); //adding checkbox to mark finished tasks
 
     }
 
-
-
-    public void handleOpen(){
-        fileChooser.setTitle("Open");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter( "text file", "*.txt"));
+    public void handleOpen(){ //using the file chooser to determine the path to open a file if needed
+        fileChooser.setTitle("Open"); //setting the title as open
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter( "text file", "*.txt")); //filtering so only text files will be asked for
         try {
-            Window stage = null;
-            File file = fileChooser.showOpenDialog(stage);
-            fileChooser.setInitialDirectory(file.getParentFile());
-            //
-            Scanner buff = new Scanner(new File(file.getPath()));
-            ArrayList<String> listOfLines = new ArrayList<String>();
-            while (buff.hasNextLine())
-                listOfLines.add(buff.nextLine());
-            ArrayList<String> finishTest = new ArrayList<>();
+            Window stage = null; //intializing stage
+            File file = fileChooser.showOpenDialog(stage); //calling and defining the file chooser
+            fileChooser.setInitialDirectory(file.getParentFile()); //set initial place to look as previous
+            Scanner buff = new Scanner(new File(file.getPath())); //writing path
+            ArrayList<String> listOfLines = new ArrayList<String>(); //storing the opened file into an arraylist
+            while (buff.hasNextLine()) //looping to asses each line
+                listOfLines.add(buff.nextLine()); //adding said lines to new list
+            ArrayList<String> finishTest = new ArrayList<>(); //new list
             for (String lines : listOfLines) { //for each with lines and lineOfLines
                 String[] words = lines.split(","); //creating a partition for the file to separate at the commas
-                for (String s : words) {
+                for (String s : words) { //pulling each
                     finishTest.add(s);
                 }
                 String output = "";
                 for( int i=0; i<=finishTest.size()-1; i++ ){
-                    output = finishTest.get(i) + "\n";
-
+                    output = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
                 }
                 Model modelTest = new Model(output, output);
                 tableview.getItems().add(modelTest);
-
-
             }
         }
         catch(Exception e){}
     }
     ObservableList<Model> observableList = FXCollections.observableArrayList();
-    @FXML
-    public void catchFile() throws FileNotFoundException {
-        Scanner buff = new Scanner(new File("src/main/resources/ucf/assignment/todoListFiles/NewList.txt"));
-        ArrayList<String> listOfLines = new ArrayList<String>();
-        while (buff.hasNextLine())
-            listOfLines.add(buff.nextLine());
-        ArrayList<String> finishTest = new ArrayList<>();
-        for (String lines : listOfLines) { //for each with lines and lineOfLines
-            String[] words = lines.split(","); //creating a partition for the file to separate at the commas
-            finishTest.addAll(Arrays.asList(words));
-            String output = "";
-            for( int i=0; i<=finishTest.size()-1; i++ ){
-                output = finishTest.get(i) + "\n";
 
-            }
-            Model modelTest = new Model(output, output);
-            tableview.getItems().add(modelTest);
-
-
-        }
-    }
-
-    public void addNPQ (ActionEvent event){
-        String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        Model model = new Model(inputTask.getText(), date);
-        tableview.getItems().add(model);
+    public void addItems(ActionEvent event){ //function to add items to list
+        String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); //pull in format for the date
+        Model model = new Model(inputTask.getText(), date);//run the inputted text through the model to designate which values land where
+        tableview.getItems().add(model);//display said items on the table
     }
 
     @FXML
-    private void dragandDrop(DragEvent event){
-        event.acceptTransferModes(TransferMode.ANY);
+    private void removeItem(ActionEvent event) {//remove item from the to-do list
+        int selectedItem = tableview.getSelectionModel().getSelectedIndex(); //select an item
+        observableList.remove(selectedItem); //remove the selected item from the list
     }
 
-    public void completeTask(ActionEvent event){
-        int selectedItem = tableview.getSelectionModel().getSelectedIndex();
-        System.out.print(selectedItem);
+    public void onEditChange(TableColumn.CellEditEvent<Model, String> modelStringCellEditEvent) {//make list columns editable
+    Model model = tableview.getSelectionModel().getSelectedItem();//grabbing an item
+    model.setTaskName(modelStringCellEditEvent.getNewValue()); //replacing said item
     }
 
-    @FXML
-    private void removeItem(ActionEvent event) {
-        int selectedItem = tableview.getSelectionModel().getSelectedIndex();
-        observableList.remove(selectedItem);
+    public void clearList(ActionEvent event){//clearing list
+        tableview.getItems().clear(); //grabbing all items to clear
     }
 
-    public void onEditChange(TableColumn.CellEditEvent<Model, String> modelStringCellEditEvent) {
-    Model model = tableview.getSelectionModel().getSelectedItem();
-    model.setTaskName(modelStringCellEditEvent.getNewValue());
-    }
-
-    public void clearList(ActionEvent event){
-        tableview.getItems().clear();
-    }
-
-    public void saveList (ActionEvent event){
-
-        BufferedWriter bw = null;
+    public void saveList (ActionEvent event){ //saving list
+        Window stage = menuBarLoad.getScene().getWindow(); //displaying and opening
+        fileChooser.setTitle("Save"); //title
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter( "text file", "*.txt")); //filtering to only have relevant files
+        BufferedWriter bw = null; //buffered writer to make easier
         try {
-            String str = "File Handling in Java using "+
-                    " FileWriter and FileReader";
-            String fileName = nameFile.getText();
-            fileName = fileName.replaceAll("\\s+", "");
-            System.out.print(fileName);
-            FileWriter fw=new FileWriter("src/main/resources/ucf/assignment/todoListFiles/"+fileName+".txt");
+            File file = fileChooser.showSaveDialog((stage)); //launcing dialogue for saving
+            fileChooser.setInitialDirectory((file.getParentFile()));
+            FileWriter fw=new FileWriter(file);//writing file
             bw = new BufferedWriter(fw);
 
             for(Model string: observableList) {
-                fw.write(string.getTaskName() + "," + string.getDueDate() + "\n");
+                fw.write(string.getTaskName() + "," + string.getDueDate() + "\n"); //splitting the columns to store separately
             }
-            bw.close();
-            System.out.println("Writing successful");
+            bw.close(); //closing bufered writer
             fw.close();
         }
         catch(Exception e){
@@ -181,4 +140,5 @@ public class Control implements Initializable{
         scene.getStylesheets().add("ucf/assignment/toDoList.css");
         stage.show(); // display the stage
     }
+
 }

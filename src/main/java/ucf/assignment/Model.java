@@ -1,16 +1,19 @@
 package ucf.assignment;
-
+/*
+ *  UCF COP3330 Summer 2021 Assignment 4 Solution
+ *  Copyright 2021 Erica Joseph
+ */
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
 
 public class Model {
 
-    private SimpleStringProperty taskName;
-    private SimpleStringProperty dueDate;
-    private CheckBox status;
+    private SimpleStringProperty taskName; //making it so tableview can accept while defining
+    private SimpleStringProperty dueDate;//making it so tableview can accept while defining
+    private CheckBox status;//making it so tableview can accept while defining
 
     public Model(String taskName, String dueDate) {
-        this.taskName = new SimpleStringProperty(taskName);
+        this.taskName = new SimpleStringProperty(taskName); //stating task name as retrievable
         this.dueDate = new SimpleStringProperty(dueDate);
         this.status = new CheckBox();
 

@@ -1,5 +1,8 @@
 package ucf.assignment;
-
+/*
+ *  UCF COP3330 Summer 2021 Assignment 4 Solution
+ *  Copyright 2021 Erica Joseph
+ */
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.Writer;
@@ -32,35 +35,15 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class MainControl implements Initializable{
-
-    public Button newFile;
-    public Button loadFile;
-    public Button deleteFile;
-    public TextField fileInput;
+    ;
     public MenuBar menuBar;
-
+    public Menu instructions;
+    FileChooser fileChooser = new FileChooser();
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
         fileChooser.setInitialDirectory(new File("C:\\Users\\erica\\Documents\\OOP\\TestingAgain\\src\\main\\resources\\ucf\\assignment\\todoListFiles"));
     }
-    public void handleSave (){
-        Window stage = menuBar.getScene().getWindow();
-        fileChooser.setTitle("Save Dialoge");
-        fileChooser.setInitialFileName("mysave");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter( "text file", ".txt"));
-        try {
-            File file = fileChooser.showSaveDialog((stage));
-            fileChooser.setInitialDirectory(file.getParentFile());
-        }
-        catch(Exception e){}
-    }
-    ObservableList<MainModel> observableList1 = FXCollections.observableArrayList(
-            new MainModel("Erica"));
-
-    public void addNewFile (ActionEvent action) {
-
-        }
     public void todolist(ActionEvent event) throws Exception {
         Stage stage;
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ucf/assignment/TableViewLoad.fxml")));
@@ -71,9 +54,16 @@ public class MainControl implements Initializable{
         scene.getStylesheets().add("ucf/assignment/toDoList.css");
         stage.show(); // display the stage
     }
-
-    FileChooser fileChooser = new FileChooser();
-
-
+    public void helping(ActionEvent event) throws Exception {
+        Stage stage;
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ucf/assignment/TableViewHelp.fxml")));
+        Scene scene = new Scene(root); // attach scene graph to scene
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("To-do List"); // displayed in window's title bar
+        stage.setScene(scene); // attach scene to stage
+        scene.getStylesheets().add("ucf/assignment/toDoList.css");
+        stage.show(); // display the stage
     }
+
+}
 

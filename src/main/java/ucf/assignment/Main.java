@@ -12,9 +12,6 @@ import java.util.Objects;
 
 public class Main extends Application {
 
-    Scene main, todolist, instructions;
-    Stage window;
-
 
     @Override
     public void start(Stage stage) throws Exception {

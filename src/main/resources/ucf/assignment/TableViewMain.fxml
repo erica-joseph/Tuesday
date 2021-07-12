@@ -37,5 +37,6 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Button fx:id="instruction" layoutX="255.0" layoutY="167.0" mnemonicParsing="false" onAction="#helping" prefHeight="17.0" prefWidth="91.0" style="-fx-border-color: f6d198;" text="Instructions" textFill="#f6d198" />
     </children>
 </AnchorPane>
