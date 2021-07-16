@@ -1,7 +1,7 @@
 
 .root
 {
-	-fx-background-color: #707070;
+	-fx-background-color: #2a2a2a;
 	-fx-text-fill: #f6d198;
 }
 
@@ -23,8 +23,8 @@
 }
 
 .table-view .table-row-cell {
-    -fx-control-inner-background: #707070;
-    -fx-control-inner-background-alt: #707070;
+    -fx-control-inner-background: #2a2a2a;
+    -fx-control-inner-background-alt: #2a2a2a;
 }
 .table-view:focused{
     -fx-background-color: transparent;
@@ -50,12 +50,12 @@
 
 
 .importantText{
-    -fx-prompt-text-fill: #707070;
+    -fx-prompt-text-fill: #2a2a2a;
 }
 
 .text-field {
 -fx-background-color: #f6d198;
-    -fx-prompt-text-fill: #707070;
+    -fx-prompt-text-fill: #2a2a2a;
     -fx-underline: true;
     -fx-prompt-text-underline: true;
     -fx-border-color: #f6d198;
@@ -66,7 +66,7 @@
 }
 
 .date-picker > .text-field {
--fx-prompt-text-fill: #707070;
+-fx-prompt-text-fill: #2a2a2a;
     -fx-background-color: #f6d198;
         -fx-control-inner-background: #f6d198;
         }
@@ -87,4 +87,30 @@
 
     -fx-background-color: transparent;
     -fx-border-color: #f6d198;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5em;
 }

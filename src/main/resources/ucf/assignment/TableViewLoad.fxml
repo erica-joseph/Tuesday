@@ -3,9 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -14,42 +11,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700" prefWidth="600" style="-fx-background-color: #707070;" stylesheets="@toDoList.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignment.Control">
+<AnchorPane prefHeight="700" prefWidth="600" style="-fx-background-color: #2a2a2a;" stylesheets="@toDoList.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignment.Control">
     <children>
-        <TableView fx:id="tableview" editable="true" layoutX="20.0" layoutY="189.0" prefHeight="310.0" prefWidth="556.0" style="-fx-background-color: transparent;">
+        <TableView fx:id="tableview" editable="true" layoutX="22.0" layoutY="165.0" prefHeight="310.0" prefWidth="556.0" style="-fx-background-color: transparent;">
             <columns>
             <TableColumn fx:id="status" prefWidth="73.66666412353516" text="Status" />
                 <TableColumn fx:id="colTask" onEditStart="#onEditChange" prefWidth="343.3333435058594" text="Task" />
                 <TableColumn fx:id="dueDate" onEditStart="#onEditChange" prefWidth="138.66665649414062" text="Date" />
             </columns>
         </TableView>
-        <TextField fx:id="inputTask" layoutX="17.0" layoutY="549.0" prefHeight="27.0" prefWidth="351.0" promptText="insert task" />
+        <TextField fx:id="inputTask" layoutX="17.0" layoutY="549.0" prefHeight="27.0" prefWidth="351.0" promptText="Add new task..." />
         <Button fx:id="addItem" layoutX="17.0" layoutY="588.0" mnemonicParsing="false" onAction="#addItems" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: #f6d198;" styleClass="buttons" text="Add Task" textFill="#f6d198" />
       <Button fx:id="delete" layoutX="113.0" layoutY="588.0" mnemonicParsing="false" onAction="#removeItem" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: #f6d198;" styleClass="buttons" text="Delete" textFill="#f6d198" />
-      <Label layoutX="18.0" layoutY="513.0" styleClass="heading" text="Add a task to your list" textFill="#f6d198" />
-      <Label layoutX="17.0" layoutY="630.0" style="-fx-text-fill: f6d198;" text="Save this list with others..." />
-      <DatePicker fx:id="datePicker" layoutX="371.0" layoutY="549.0" prefHeight="25.0" prefWidth="185.0" promptText="select a due date" style="-fx-background-color: transparent;" />
+      <Label layoutX="17.0" layoutY="513.0" style="-fx-underline: false;" styleClass="heading" text="Add a task to your list...." textFill="#f6d198" />
+      <DatePicker fx:id="datePicker" layoutX="371.0" layoutY="549.0" prefHeight="25.0" prefWidth="185.0" promptText="Select a due date..." style="-fx-background-color: transparent;" />
       <Button fx:id="ClearingList" layoutX="210.0" layoutY="588.0" mnemonicParsing="false" onAction="#clearList" prefHeight="24.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-border-color: #f6d198;" styleClass="buttons" text="Clear List" textFill="#f6d198" />
-      <ImageView fitHeight="42.0" fitWidth="162.0" layoutX="416.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="42.0" fitWidth="162.0" layoutX="415.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@StyleResources/LogoFortoDoList.png" />
          </image>
       </ImageView>
-      <Button fx:id="takeHome" layoutX="25.0" layoutY="77.0" mnemonicParsing="false" onAction="#main" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: transparent; -fx-border-color: #f6d198;" styleClass="buttons" text="Home" textFill="#f6d198" />
-      <MenuBar fx:id="menuBarLoad" layoutX="1.0" layoutY="1.0" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: transparent; -fx-background-color: f6d198; -fx-text-fill: #707070;">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem fx:id="save" mnemonicParsing="false" onAction="#saveList" text="Save" />
-                  <MenuItem fx:id="save1" mnemonicParsing="false" onAction="#handleOpen" text="Open" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <TextField fx:id="nameFile" layoutX="23.0" layoutY="133.0" onAction="#saveList" prefHeight="17.0" prefWidth="556.0" promptText="Name list...">
+      <Button fx:id="takeHome" layoutX="24.0" layoutY="41.0" mnemonicParsing="false" onAction="#main" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: transparent; -fx-border-color: #f6d198;" styleClass="buttons" text="Home" textFill="#f6d198" />
+      <TextField fx:id="nameFile" layoutX="22.0" layoutY="119.0" onAction="#saveList" prefHeight="17.0" prefWidth="556.0" promptText="Name list...">
          <font>
             <Font size="13.0" />
          </font>
       </TextField>
+      <Button fx:id="savingList" layoutX="17.0" layoutY="632.0" mnemonicParsing="false" onAction="#saveList" text="Save">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="OpenFIle" layoutX="99.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleOpen" text="Open">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

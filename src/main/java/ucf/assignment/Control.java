@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import javafx.scene.input.*;
@@ -27,66 +29,51 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class Control implements Initializable{
-    public TableView<Model> tableview; //table to display tasks
 
+    //storage
+    public TableView<Model> tableview; //table to display tasks
     public TableColumn<Model,String> colTask; //column defining and holding tasks
     public TableColumn<Model, String> dueDate; //column defining and holding the due date per task
-    public TableColumn status; //checkmark to note done tasks
+    public TableColumn<Model, String> status; //checkmark to note done tasks
+    //display
 
+    //action
     public TextField inputTask; //textfied input to store the item added to the to-do list
     public Button addItem; //adding item to said list
     public Button delete; //initiating the button to delete a selected item from the list
     public DatePicker datePicker; //choosing date to submit to to-do list
     public Button ClearingList; //button to execute the action of deleting all items from list
-    public Button saving;
-    public MenuBar menuBarLoad; //initiatin the menu
     public TextField nameFile; //submitting title of text
-    public MenuItem saveList;
-    public MenuItem save; //act of saving and writing the tasks from the list
+    public Button savingList;
 
     FileChooser fileChooser = new FileChooser(); //instance of the file chooser
 
+
+    //checkbox has .isSelected()
     @Override
     public void initialize(URL location, ResourceBundle resources){ //loading the initialized statements
         colTask.setCellValueFactory(new PropertyValueFactory<>("taskName")); //initializing taksks
+        colTask.setCellFactory(TextFieldTableCell.forTableColumn()); //setting tasks to accept the text
         dueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate")); //initializing due dates
         tableview.setItems(observableList); //printle items of the table
         tableview.setEditable(true); //determining them editable
-        colTask.setCellFactory(TextFieldTableCell.forTableColumn()); //setting tasks to accept the text
         status.setCellValueFactory(new PropertyValueFactory<>("status")); //adding checkbox to mark finished tasks
+        tableview.setPlaceholder(new Label(" "));//displays no contents in table before items are added to the list
 
     }
 
-    public void handleOpen(){ //using the file chooser to determine the path to open a file if needed
-        fileChooser.setTitle("Open"); //setting the title as open
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter( "text file", "*.txt")); //filtering so only text files will be asked for
-        try {
-            Window stage = null; //intializing stage
-            File file = fileChooser.showOpenDialog(stage); //calling and defining the file chooser
-            fileChooser.setInitialDirectory(file.getParentFile()); //set initial place to look as previous
-            Scanner buff = new Scanner(new File(file.getPath())); //writing path
-            ArrayList<String> listOfLines = new ArrayList<String>(); //storing the opened file into an arraylist
-            while (buff.hasNextLine()) //looping to asses each line
-                listOfLines.add(buff.nextLine()); //adding said lines to new list
-            ArrayList<String> finishTest = new ArrayList<>(); //new list
-            for (String lines : listOfLines) { //for each with lines and lineOfLines
-                String[] words = lines.split(","); //creating a partition for the file to separate at the commas
-                for (String s : words) { //pulling each
-                    finishTest.add(s);
-                }
-                String output = "";
-                for( int i=0; i<=finishTest.size()-1; i++ ){
-                    output = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
-                }
-                Model modelTest = new Model(output, output);
-                tableview.getItems().add(modelTest);
-            }
-        }
-        catch(Exception e){}
-    }
+
     ObservableList<Model> observableList = FXCollections.observableArrayList();
 
+
+    //Actions performed on the list
+    @FXML
     public void addItems(ActionEvent event){ //function to add items to list
+        addItemsDisplay();
+        refresh();
+    }
+
+    public void addItemsDisplay(){
         String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); //pull in format for the date
         Model model = new Model(inputTask.getText(), date);//run the inputted text through the model to designate which values land where
         tableview.getItems().add(model);//display said items on the table
@@ -94,6 +81,10 @@ public class Control implements Initializable{
 
     @FXML
     private void removeItem(ActionEvent event) {//remove item from the to-do list
+        removeItemDisplay();
+    }
+
+    public void removeItemDisplay(){
         int selectedItem = tableview.getSelectionModel().getSelectedIndex(); //select an item
         observableList.remove(selectedItem); //remove the selected item from the list
     }
@@ -103,12 +94,29 @@ public class Control implements Initializable{
     model.setTaskName(modelStringCellEditEvent.getNewValue()); //replacing said item
     }
 
+    @FXML
     public void clearList(ActionEvent event){//clearing list
-        tableview.getItems().clear(); //grabbing all items to clear
+        clearListDisplay(); //grabbing all items to clear
     }
 
+    public void clearListDisplay(){
+        tableview.getItems().clear();
+    }
+
+    //refresh to reset the items in the list
+    private void refresh(){
+        datePicker.setValue(LocalDate.now()); //reset date picker to the current date
+        inputTask.setText(null); //reeset textfield to be empty before the item is introduced
+    }
+
+    //Storage of contents
+    @FXML
     public void saveList (ActionEvent event){ //saving list
-        Window stage = menuBarLoad.getScene().getWindow(); //displaying and opening
+        saveListDisplay ();
+    }
+
+    public void saveListDisplay (){
+        Window stage = savingList.getScene().getWindow(); //displaying and opening
         fileChooser.setTitle("Save"); //title
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter( "text file", "*.txt")); //filtering to only have relevant files
         BufferedWriter bw = null; //buffered writer to make easier
@@ -130,15 +138,61 @@ public class Control implements Initializable{
     }
 
 
+    @FXML
+    public void handleOpen(){ //using the file chooser to determine the path to open a file if needed
+        handleOpenDisplay();
+    }
+
+    public void handleOpenDisplay(){
+        Window stage = savingList.getScene().getWindow(); //displaying and opening
+        fileChooser.setTitle("Save"); //title
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter( "text file", "*.txt")); //filtering to only have relevant files
+        try {
+            File file = fileChooser.showOpenDialog((stage)); //launcing dialogue for saving
+            fileChooser.setInitialDirectory((file.getParentFile()));
+            Scanner buff = new Scanner(new File(String.valueOf(file))); //writing path
+
+            ArrayList<String> listOfLines = new ArrayList<String>(); //storing the opened file into an arraylist
+
+            while (buff.hasNextLine()) //looping to asses each line
+                listOfLines.add(buff.nextLine()); //adding said lines to new list
+
+            for (String lines : listOfLines) { //for each with lines and lineOfLines
+                ArrayList<String> finishTest = new ArrayList<>(); //new list
+                String[] words = lines.split(","); //creating a partition for the file to separate at the commas
+                //pulling each
+                finishTest.addAll(Arrays.asList(words));
+                String output = "";
+                String output2 = "";
+
+
+                for( int i=0; i<=finishTest.size()-1; i++ ){
+                    if(i==0){
+                        output = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
+                    }
+                    else if(i==1){
+                        output2 = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
+                    }
+
+                }
+
+                Model modelTest = new Model(output, output2);
+                tableview.getItems().add(modelTest);
+            }
+        }
+        catch(Exception e){}
+    }
+
+
+    //Changing Scenes
     public void main(ActionEvent event) throws Exception {
-        Stage stage;
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ucf/assignment/TableViewMain.fxml")));
+        Stage stage;//set stage
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ucf/assignment/TableViewMain.fxml")));//load the main view of fxml
         Scene scene = new Scene(root); // attach scene graph to scene
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("To-do List"); // displayed in window's title bar
         stage.setScene(scene); // attach scene to stage
-        scene.getStylesheets().add("ucf/assignment/toDoList.css");
+        scene.getStylesheets().add("ucf/assignment/toDoList.css");//load the custom cascading sheed
         stage.show(); // display the stage
     }
-
 }

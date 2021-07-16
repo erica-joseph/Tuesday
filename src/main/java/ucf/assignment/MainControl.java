@@ -38,12 +38,12 @@ public class MainControl implements Initializable{
     ;
     public MenuBar menuBar;
     public Menu instructions;
-    FileChooser fileChooser = new FileChooser();
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
-        fileChooser.setInitialDirectory(new File("C:\\Users\\erica\\Documents\\OOP\\TestingAgain\\src\\main\\resources\\ucf\\assignment\\todoListFiles"));
     }
+
+    ObservableList<MainModel> mainList = FXCollections.observableArrayList();
     public void todolist(ActionEvent event) throws Exception {
         Stage stage;
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ucf/assignment/TableViewLoad.fxml")));
@@ -54,6 +54,7 @@ public class MainControl implements Initializable{
         scene.getStylesheets().add("ucf/assignment/toDoList.css");
         stage.show(); // display the stage
     }
+
     public void helping(ActionEvent event) throws Exception {
         Stage stage;
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ucf/assignment/TableViewHelp.fxml")));
