@@ -1,0 +1,52 @@
+@startuml
+
+class toDoList {
+    main()
+    start()
+}
+
+class toDoListController {
+    toDoListModel
+
+    NavBar
+
+    ListView
+    AddItemButton
+    DatePickerButton
+    DescriptionTextField
+}
+
+class toDoListModel {
+    addtoDoList()
+    removetoDoList()
+    editTitletoDoList()
+    addItemtoDoList()
+    removeItemtoDoList()
+    CompleteItemtoDoList()
+    displayExistingItemtoDoList()
+    displayIncompleteItemtoDoList()
+    displayCompleteItemtoDoList()
+    saveItemstoDoList()
+    savetoDoList()
+    loadtoDoList()
+    loadMultotoDoList()
+    toString(): String
+}
+
+class toDoListItem {
+    description: String
+    dueDate: Date
+    'of format MM-DD-YYYY
+
+    editDesItemtoDoList (String)
+    editDueItemtoDoList (Date)
+
+    toString(): String
+}
+
+toDoListModel *->toDoListItem
+toDoList -- toDoListController
+toDoListController *--> toDoListModel
+
+
+@enduml
