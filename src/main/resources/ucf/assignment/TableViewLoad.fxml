@@ -31,12 +31,7 @@
             <Image url="@StyleResources/LogoFortoDoList.png" />
          </image>
       </ImageView>
-      <Button fx:id="takeHome" layoutX="24.0" layoutY="41.0" mnemonicParsing="false" onAction="#main" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: transparent; -fx-border-color: #f6d198;" styleClass="buttons" text="Home" textFill="#f6d198" />
-      <TextField fx:id="nameFile" layoutX="22.0" layoutY="119.0" onAction="#saveList" prefHeight="17.0" prefWidth="556.0" promptText="Name list...">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </TextField>
+      <Button fx:id="takeHome" layoutX="24.0" layoutY="41.0" mnemonicParsing="false" onAction="#main" prefHeight="27.0" prefWidth="68.0" style="-fx-background-color: transparent; -fx-border-color: #f6d198;" styleClass="buttons" text="◂ Home" textFill="#f6d198" />
       <Button fx:id="savingList" layoutX="17.0" layoutY="632.0" mnemonicParsing="false" onAction="#saveList" text="Save">
          <font>
             <Font size="22.0" />

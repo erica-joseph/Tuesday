@@ -5,7 +5,6 @@ package ucf.assignment;
  */
 import java.net.URL;
 
-import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,19 +29,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableModel;
-
 public class Control implements Initializable{
 
     //storage
     public TableView<Model> tableview; //table to display tasks
     public TableColumn<Model,String> colTask; //column defining and holding tasks
     public TableColumn<Model, String> dueDate; //column defining and holding the due date per task
-    public TableColumn<Model, String> status; //checkmark to note done tasks
-    public TableColumn<Model,Boolean>  stated = new TableColumn<>("Check");
+    public TableColumn<Model,Boolean> status = new TableColumn<>("Status");
 
     //display
 
@@ -54,8 +47,6 @@ public class Control implements Initializable{
     public Button ClearingList; //button to execute the action of deleting all items from list
     public TextField nameFile; //submitting title of text
     public Button savingList;
-    public ComboBox displayItems;
-    public CheckBox state;
 
     FileChooser fileChooser = new FileChooser(); //instance of the file chooser
 
@@ -127,7 +118,6 @@ public class Control implements Initializable{
     }
 
 
-
     //refresh to reset the items in the list
     private void refresh(){
         datePicker.setValue(LocalDate.now()); //reset date picker to the current date
@@ -145,7 +135,7 @@ public class Control implements Initializable{
 
 
     public void CompleteTask(){
-
+        status.isSelected();
     }
 
 

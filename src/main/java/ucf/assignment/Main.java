@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ucf/assignment/TableViewLoad.fxml"))); //access the file needed to load FXML; this will be the source of the code
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ucf/assignment/TableViewMain.fxml"))); //access the file needed to load FXML; this will be the source of the code
             Scene scene = new Scene(root); // attach scene graph to scene
             stage.setTitle("To-do List"); // displayed in window's title bar
             stage.setScene(scene); // attach scene to stage

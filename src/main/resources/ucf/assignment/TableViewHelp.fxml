@@ -3,51 +3,59 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: #707070;" stylesheets="@toDoList.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignment.InstructionsControl">
+<AnchorPane prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: #2a2a2a;" stylesheets="@toDoList.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignment.InstructionsControl">
     <children>
-      <ImageView fitHeight="101.0" fitWidth="512.0" layoutX="84.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="101.0" fitWidth="512.0" layoutX="74.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@StyleResources/LogoFortoDoList.png" />
          </image>
       </ImageView>
-      <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="600.0" style="-fx-background-color: f6d198;">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Label layoutX="70.0" layoutY="196.0" prefHeight="27.0" prefWidth="98.0" styleClass="heading" text="Instructions" textFill="#f6d198" />
-      <Button layoutX="70.0" layoutY="327.0" mnemonicParsing="false" style="-fx-border-color: #f6d198;" text="Add" />
-      <Button layoutX="70.0" layoutY="361.0" mnemonicParsing="false" style="-fx-border-color: #f6d198;" text="Delete" />
-      <Button layoutX="70.0" layoutY="395.0" mnemonicParsing="false" style="-fx-border-color: #f6d198;" text="Clear List" />
-      <Text fill="#f6d198" layoutX="125.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adds a new task to your to-do list">
+      <Label layoutX="73.0" layoutY="264.0" prefHeight="27.0" prefWidth="98.0" styleClass="heading" text="Instructions" textFill="#f6d198" />
+      <Button layoutX="74.0" layoutY="368.0" mnemonicParsing="false" style="-fx-border-color: #f6d198;" text="Add" />
+      <Button layoutX="74.0" layoutY="402.0" mnemonicParsing="false" style="-fx-border-color: #f6d198;" text="Delete" />
+      <Button layoutX="74.0" layoutY="436.0" mnemonicParsing="false" style="-fx-border-color: #f6d198;" text="Clear List" />
+      <Text fill="#f6d198" layoutX="129.0" layoutY="386.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adds a new task to your to-do list">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text fill="#f6d198" layoutX="130.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deletes task from your to-do list">
+      <Text fill="#f6d198" layoutX="134.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deletes task from your to-do list">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text fill="#f6d198" layoutX="142.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clears list of all tasks">
+      <Text fill="#f6d198" layoutX="146.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clears list of all tasks">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <CheckBox layoutX="69.0" layoutY="428.0" mnemonicParsing="false" text="Marks a task as done" textFill="#f6d198" />
-      <Button fx:id="takeHome" layoutX="70.0" layoutY="41.0" mnemonicParsing="false" onAction="#home" style="-fx-border-color: #f6d198;" text="Home" />
+      <CheckBox layoutX="73.0" layoutY="472.0" mnemonicParsing="false" text="Marks a task as done" textFill="#f6d198" />
+      <Button fx:id="takeHome" layoutX="25.0" layoutY="39.0" mnemonicParsing="false" onAction="#home" style="-fx-border-color: #f6d198;" text="◂ Home" />
+      <Button layoutX="70.0" layoutY="300.0" mnemonicParsing="false" text="Save">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="67.0" layoutY="330.0" mnemonicParsing="false" text="Open">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Text fill="#f6d198" layoutX="117.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saves lists externally.">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#f6d198" layoutX="117.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opens list from external location.">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>
