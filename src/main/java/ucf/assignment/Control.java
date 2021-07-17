@@ -52,8 +52,6 @@ public class Control implements Initializable{
 
     FileChooser fileChooser = new FileChooser(); //instance of the file chooser
 
-
-    //checkbox has .isSelected()
     @Override
     public void initialize(URL location, ResourceBundle resources){ //loading the initialized statements
         colTask.setCellValueFactory(new PropertyValueFactory<>("taskName")); //initializing taksks
