@@ -22,6 +22,8 @@ public class Main extends Application {
             stage.setScene(scene); // attach scene to stage
             scene.getStylesheets().add("ucf/assignment/toDoList.css"); //stylesheet on hand
             stage.show(); // display the stage
+
+          
         }
         catch (Exception ignored){
 

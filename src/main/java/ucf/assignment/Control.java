@@ -29,6 +29,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import static javafx.scene.control.cell.CheckBoxTableCell.*;
+
 public class Control implements Initializable{
 
     //storage
@@ -135,7 +137,7 @@ public class Control implements Initializable{
 
 
     public void CompleteTask(){
-        status.isSelected();
+
     }
 
 

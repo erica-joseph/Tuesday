@@ -72,4 +72,12 @@ class ControlTest {
     void handleOpenDisplay() {
 
     }
+
+    @Test
+    void testingforChecking() {
+
+        Model addingandItem = new Model("Get candy", "2021-10-02", true);
+        assertEquals(0, observableList3.size());
+
+    }
 }
