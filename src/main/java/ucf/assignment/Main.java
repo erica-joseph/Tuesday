@@ -23,7 +23,7 @@ public class Main extends Application {
             scene.getStylesheets().add("ucf/assignment/toDoList.css"); //stylesheet on hand
             stage.show(); // display the stage
         }
-        catch (Exception e){
+        catch (Exception ignored){
 
         }
     }

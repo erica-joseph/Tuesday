@@ -38,34 +38,51 @@ class ControlTest {
 
         @Test
     void addItemsDisplay_give_true_if_display_no_null_list() {
+            ObservableList<Model> observableList = FXCollections.observableArrayList();
+            observableList.add(new Model("Get milk", "2021-10-02", true));
 
-        Model model = new Model("Get milk", "2021-10-02");
-        assertTrue(observableList.size()!=0);
+            assertTrue(observableList.size()!=0);
     }
 
     @Test
     void removeItemDisplay() {
-        //Model model = new Model("Get milk", "2021-10-02");
-        //tableview.getItems().add(model);
-        //assert(observableList.size()!=observableList.size());
+        ObservableList<Model> observableList2 = FXCollections.observableArrayList();
+
+        Model addingandItem = new Model("Get candy", "2021-10-02", true);
+        observableList2.add(addingandItem);
+        observableList2.remove(addingandItem);
+        assertEquals(0, observableList2.size());
     }
 
     @Test
     void onEditChange() {
+        String taksName = "Get milk";
+        Model model = new Model(taksName, "2021-10-02", true);
+
+        String taksName2 = "Candy";
+        Model model2 = new Model(taksName2, "2021-10-02", true);
+        model.setTaskName("Hello stranger.");
+        assertNotEquals(model,model2);
     }
 
     @Test
     void clearListDisplay() {
-        //Model model = new Model("Get milk", "2021-10-02");
-        //tableview.getItems().add(model);
-        //assertTrue( observableList.size()=0);
+        ObservableList<Model> observableList3 = FXCollections.observableArrayList();
+
+        Model addingandItem = new Model("Get candy", "2021-10-02", true);
+        observableList3.add(addingandItem);
+        observableList3.removeAll(addingandItem);
+        assertEquals(0, observableList3.size());
+
     }
 
     @Test
     void saveListDisplay() {
+
     }
 
     @Test
     void handleOpenDisplay() {
+
     }
 }

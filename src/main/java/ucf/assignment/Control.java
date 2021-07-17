@@ -5,6 +5,7 @@ package ucf.assignment;
  */
 import java.net.URL;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,14 +20,20 @@ import javafx.fxml.Initializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import javafx.scene.input.*;
+
+import javafx.scene.control.cell.CheckBoxTableCell;
+
 import java.io.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.ChoiceBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
 
 public class Control implements Initializable{
 
@@ -35,6 +42,8 @@ public class Control implements Initializable{
     public TableColumn<Model,String> colTask; //column defining and holding tasks
     public TableColumn<Model, String> dueDate; //column defining and holding the due date per task
     public TableColumn<Model, String> status; //checkmark to note done tasks
+    public TableColumn<Model,Boolean>  stated = new TableColumn<>("Check");
+
     //display
 
     //action
@@ -45,6 +54,8 @@ public class Control implements Initializable{
     public Button ClearingList; //button to execute the action of deleting all items from list
     public TextField nameFile; //submitting title of text
     public Button savingList;
+    public ComboBox displayItems;
+    public CheckBox state;
 
     FileChooser fileChooser = new FileChooser(); //instance of the file chooser
 
@@ -57,31 +68,43 @@ public class Control implements Initializable{
         dueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate")); //initializing due dates
         tableview.setItems(observableList); //printle items of the table
         tableview.setEditable(true); //determining them editable
-        status.setCellValueFactory(new PropertyValueFactory<>("status")); //adding checkbox to mark finished tasks
+        status.setCellFactory(column -> new CheckBoxTableCell());
         tableview.setPlaceholder(new Label(" "));//displays no contents in table before items are added to the list
-
+//      displayItems.getItems().removeAll(displayItems.getItems());
+//      displayItems.getItems().addAll("Display all", "Display completed", "Display incomplete");
     }
 
 
-    ObservableList<Model> observableList = FXCollections.observableArrayList();
+    ObservableList<Model> observableList = FXCollections.observableArrayList(
+            new Model("Buy some candy", "2021-12-15", false)
+    );
 
 
     //Actions performed on the list
     @FXML
     public void addItems(ActionEvent event){ //function to add items to list
+        try{
         addItemsDisplay();
-        refresh();
-    }
+        refresh();}
+        catch (Exception exception){
+            inputTask.setPromptText("Input a valid task.");}
+        }
+
 
     public void addItemsDisplay(){
         String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); //pull in format for the date
-        Model model = new Model(inputTask.getText(), date);//run the inputted text through the model to designate which values land where
+        Model model = new Model(inputTask.getText(), date, true);//run the inputted text through the model to designate which values land where
         tableview.getItems().add(model);//display said items on the table
     }
 
     @FXML
     private void removeItem(ActionEvent event) {//remove item from the to-do list
-        removeItemDisplay();
+        try {
+            removeItemDisplay();
+        }
+        catch(Exception e){
+
+        }
     }
 
     public void removeItemDisplay(){
@@ -103,11 +126,28 @@ public class Control implements Initializable{
         tableview.getItems().clear();
     }
 
+
+
     //refresh to reset the items in the list
     private void refresh(){
         datePicker.setValue(LocalDate.now()); //reset date picker to the current date
         inputTask.setText(null); //reeset textfield to be empty before the item is introduced
     }
+
+
+
+
+    //Show all items
+
+    //Show incomplete items
+
+    //Show complete items
+
+
+    public void CompleteTask(){
+
+    }
+
 
     //Storage of contents
     @FXML
@@ -162,21 +202,25 @@ public class Control implements Initializable{
                 String[] words = lines.split(","); //creating a partition for the file to separate at the commas
                 //pulling each
                 finishTest.addAll(Arrays.asList(words));
-                String output = "";
-                String output2 = "";
+                String retrieveTask = "";
+                String retrieveDate = "";
+                String retrieveCheck = "";
 
 
                 for( int i=0; i<=finishTest.size()-1; i++ ){
                     if(i==0){
-                        output = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
+                        retrieveTask = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
                     }
                     else if(i==1){
-                        output2 = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
+                        retrieveDate = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
+                    }
+                    else if(i==2){
+                        retrieveCheck = finishTest.get(i) + "\n"; //splitting at commas and prinign as lines
                     }
 
                 }
 
-                Model modelTest = new Model(output, output2);
+                Model modelTest = new Model(retrieveTask, retrieveDate, Boolean.parseBoolean(retrieveCheck));
                 tableview.getItems().add(modelTest);
             }
         }

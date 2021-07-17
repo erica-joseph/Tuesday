@@ -42,7 +42,7 @@
             <Font size="22.0" />
          </font>
       </Button>
-      <Button fx:id="OpenFIle" layoutX="99.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleOpen" text="Open">
+      <Button fx:id="OpenFile" layoutX="99.0" layoutY="631.0" mnemonicParsing="false" onAction="#handleOpen" text="Open">
          <font>
             <Font size="22.0" />
          </font>
